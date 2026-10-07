@@ -1,26 +1,40 @@
 @import "tailwindcss";
+@plugin "daisyui";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --primary: #008f4c;
+  --primary-dark: #006f3b;
+
+  --banner-start: #f0fbea;
+  --banner-mid: #e2f8d8;
+  --banner-end: #d4f3c5;
+
+  --footer: #062b49;
+  --footer-dark: #041d31;
+
+  --background: #f7faf7;
+  --card: #ffffff;
+
+  --text: #102a20;
+  --muted: #718078;
+
+  --priceup: #087443;
+  --pricedown: #e53935;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+@theme {
+  --color-main_color: #ffffff;
+  --color-second_color: var(--text);
+  --color-accent_color: var(--primary);
+
+  --background-image-primary_gradient: linear-gradient(
+    135deg,
+    #f0fbea 0%,
+    #e2f8d8 50%,
+    #d4f3c5 100%
+  );
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@utility main-container {
+  @apply max-w-7xl mx-auto;
 }
