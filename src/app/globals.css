@@ -2,7 +2,8 @@
 @plugin "daisyui";
 
 :root {
-  --primary: #008f4c;
+  --primary: #05893e;
+  --primary-50: #05893e50;
   --primary-dark: #006f3b;
 
   --banner-start: #f0fbea;
@@ -12,7 +13,7 @@
   --footer: #062b49;
   --footer-dark: #041d31;
 
-  --background: #f7faf7;
+  --background: #f0f5f0;
   --card: #ffffff;
 
   --text: #102a20;
@@ -24,8 +25,15 @@
 
 @theme {
   --color-main_color: #ffffff;
+  --color-back_color: var(--background);
   --color-second_color: var(--text);
   --color-accent_color: var(--primary);
+  --color-accent_color-50: var(--primary-50);
+  --color-footer: var(--footer);
+  --color-footerB: var(--footer-dark);
+
+  --color-priceup: var(--priceup);
+  --color-pricedown: var(--pricedown);
 
   --background-image-primary_gradient: linear-gradient(
     135deg,

@@ -1,5 +1,4 @@
 import Link from "next/link";
-import React, { Suspense } from "react";
 
 interface NavT {
   id: string;
@@ -15,15 +14,15 @@ const NavLinks = async () => {
   const navData: NavT[] = await res.json();
   console.log(navData);
   return (
-    <div className="flex items-center main-container justify-center">
+    <div className="flex items-center main-container justify-center py-4">
       {navData.map((nav) => (
         <Link
           href={`/${nav.slug}`}
           key={nav.id}
-          className="px-3 py-px font-medium text-xs flex gap-2 items-center"
+          className="px-3 py-px font-semibold text-xs flex gap-1 items-center"
         >
-          {nav.icon}
-          {nav.nameBn}
+          <span>{nav.icon}</span>
+          <span>{nav.nameBn}</span>
         </Link>
       ))}
     </div>

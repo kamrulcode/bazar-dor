@@ -3,18 +3,19 @@ import { Suspense } from "react";
 import Date from "./Date";
 import Link from "next/link";
 import NavLinks from "./NavLinks";
+import Marquee from "./Marquee";
 
 const Header = () => {
   return (
     <header>
-      <div className="main-container navbar bg-base-100 shadow-sm">
+      <div className="main-container navbar  px-4 py-3">
         <div className="flex items-center flex-1 gap-2">
           <Image
-            src="/logo-icon.png"
-            width={40}
-            height={40}
+            src="/logo.png"
+            width={48}
+            height={48}
             alt="logo"
-            className="bg-accent_color p-2 rounded-xl "
+            className="bg-green-200 p-1 rounded-xl "
           />
           <div>
             <span className="text-xl font-bold tracking-tight">বাজার দর</span>
@@ -58,6 +59,9 @@ const Header = () => {
       </div>
       <Suspense fallback="loading ...">
         <NavLinks />
+      </Suspense>
+      <Suspense fallback="loading ...">
+        <Marquee />
       </Suspense>
     </header>
   );

@@ -1,7 +1,9 @@
+import HomePage from "@/pages/HomePage";
+
 export default function Home() {
   return (
-    <div className="main-container bg-primary_gradient  text-accentc text-7xl">
-      Hello Mango People
+    <div className="main-container   text-accentc text-7xl">
+      <HomePage />
     </div>
   );
 }
