@@ -36,7 +36,7 @@ const NavLinks = () => {
   //   setIsActive(id);
   // };
   return (
-    <div className="flex items-center main-container justify-center pt-1 pb-2">
+    <div className="flex flex-wrap  items-center main-container justify-center pt-1 pb-2">
       {data.map((nav) => (
         <Link
           // onClick={() => handleClick(nav.id)}
@@ -45,7 +45,7 @@ const NavLinks = () => {
             pathname === `/category/${nav.slug}` ? "page" : undefined
           }
           key={nav.id}
-          className={`pl-2 pr-4 py-1.5 font-semibold text-sm flex gap-1 items-center hover:bg-slate-200 rounded-lg ${pathname === `/category/${nav.slug}` ? "bg-green-700   text-main_color" : ""}`}
+          className={`pl-2 pr-4 py-1.5 font-semibold text-sm flex gap-1 items-center hover:bg-slate-200 rounded-lg ${pathname === `/category/${nav.slug}` ? "bg-green-700   text-main_color hover:text-black" : ""}`}
         >
           <span>{nav.icon}</span>
           <span>{nav.nameBn}</span>

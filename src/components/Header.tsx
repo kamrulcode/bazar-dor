@@ -37,7 +37,7 @@ const Header = () => {
 
   return (
     <header className="sticky top-0 bg-main_color z-30 border-b border-[#E1E8E1]">
-      <div className="main-container navbar px-4 py-3 ">
+      <div className="main-container navbar py-3 ">
         <Link href={"/"} className="flex items-center flex-1 gap-2">
           <Image
             src="/logo.png"
@@ -47,15 +47,17 @@ const Header = () => {
             className="bg-green-200 p-1 rounded-xl "
           />
           <div>
-            <span className="text-2xl font-bold tracking-tight">বাজার দর</span>
+            <span className="sm:text-2xl text-xl font-bold tracking-tight">
+              বাজার দর
+            </span>
             <Suspense fallback="Loading...">
-              <Date color="text-base-content/60" />
+              <Date color="text-base-content/60 text-xs sm:text-sm" />
             </Suspense>
           </div>
         </Link>
         <div className="flex flex-none ms-auto gap-2">
           <ul className="flex items-center gap-2">
-            <div className="avatar">
+            <div className="avatar sm:visible invisible">
               <div className="ring-green-300 ring-offset-green-100 w-7 rounded-sm ring-2 ring-offset-2">
                 <Image src={"/next.svg"} height={40} width={40} alt="profile" />
               </div>

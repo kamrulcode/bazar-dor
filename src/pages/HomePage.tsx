@@ -11,7 +11,7 @@ const HomePage = () => {
   return (
     <main>
       <section className="my-10 bg-primary_gradient rounded-xl">
-        <div className="flex p-6 justify-between  ">
+        <div className="sm:flex p-6 justify-between ">
           <div className="flex flex-col justify-center">
             <Suspense fallback="loading..">
               <span className="self-start bg-accent_color/10 py-1 px-3 text-sm rounded-2xl">
@@ -32,7 +32,7 @@ const HomePage = () => {
               সব পণ্য দেখুন
             </Link>
           </div>
-          <div>
+          <div className="mt-4 sm:mt-0">
             <Image
               src="/bannerImg.png"
               width={400}

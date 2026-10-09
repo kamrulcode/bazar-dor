@@ -133,7 +133,7 @@ export default function ProductDetails({
 
   return (
     <main className="min-h-screen bg-[#f0f5f0] px-3 py-4 text-[#27332b] sm:px-6 sm:py-6">
-      <div className="mx-auto max-w-6xl">
+      <div className="mx-auto max-w-7xl">
         {/* Breadcrumb */}
         <div className="mb-4 flex items-center gap-2 text-slate-950 text-sm ">
           <Link href={"/"} className="hover:underline">
