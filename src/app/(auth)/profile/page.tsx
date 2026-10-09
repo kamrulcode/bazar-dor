@@ -1,0 +1,121 @@
+"use client";
+
+import { useState } from "react";
+import Link from "next/link";
+import { LogOut, ArrowLeft, UserRound } from "lucide-react";
+
+export default function ProfilePage() {
+  const [name, setName] = useState("রহিম উদ্দিন");
+  const [updatedName, setUpdatedName] = useState("রহিম উদ্দিন");
+  const [message, setMessage] = useState("");
+
+  const handleUpdate = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    if (!updatedName.trim()) {
+      setMessage("নাম লিখুন।");
+      return;
+    }
+
+    setName(updatedName.trim());
+    setMessage("আপনার প্রোফাইল সফলভাবে আপডেট হয়েছে!");
+  };
+
+  const handleSignOut = () => {
+    // Connect your authentication sign-out function here.
+  };
+
+  return (
+    <main className="min-h-screen bg-[#f0f5f0] px-4 py-10 text-[#253029]">
+      {" "}
+      <div className="mx-auto w-full max-w-104">
+        {/* Header */}{" "}
+        <header className="mb-6 text-center">
+          {" "}
+          <h1 className="text-[25px] font-bold tracking-tight">
+            আমার প্রোফাইল{" "}
+          </h1>{" "}
+          <p className="mt-1 text-sm text-[#737d75]">
+            আপনার ব্যক্তিগত তথ্য দেখুন ও আপডেট করুন।{" "}
+          </p>{" "}
+        </header>
+        {/* Profile Card */}
+        <section className="rounded-2xl border border-[#dce5dd] bg-[#fbfcfb] px-6 py-7">
+          {/* Avatar */}
+          <div className="flex flex-col items-center">
+            <div className="avatar placeholder">
+              <div className="flex h-24 w-24 items-center justify-center overflow-hidden rounded-full border-4 border-white bg-[#e0eee3] text-[#07883e] shadow-sm">
+                <UserRound size={48} strokeWidth={1.5} />
+              </div>
+            </div>
+
+            <h2 className="mt-4 text-xl font-bold">{name}</h2>
+            <p className="mt-1 text-sm text-[#737d75]">আপনার অ্যাকাউন্ট</p>
+          </div>
+
+          <div className="my-6 h-px bg-[#e2e8e3]" />
+
+          {/* Update Profile */}
+          <form onSubmit={handleUpdate} className="space-y-4">
+            <div className="form-control">
+              <label htmlFor="name" className="mb-1.5 text-sm font-medium">
+                আপনার নাম
+              </label>
+
+              <input
+                id="name"
+                type="text"
+                value={updatedName}
+                onChange={(e) => {
+                  setUpdatedName(e.target.value);
+                  setMessage("");
+                }}
+                placeholder="আপনার নাম লিখুন"
+                className="input h-10 min-h-10 w-full rounded-lg border border-[#dce5dd] bg-transparent px-3 text-sm outline-none focus:border-[#07883e] focus:outline-none"
+                required
+              />
+            </div>
+
+            {message && (
+              <p
+                role="status"
+                className={`text-sm ${
+                  message.includes("সফলভাবে")
+                    ? "text-[#07883e]"
+                    : "text-red-600"
+                }`}
+              >
+                {message}
+              </p>
+            )}
+
+            <button
+              type="submit"
+              className="btn h-10 min-h-10 w-full rounded-lg border-none bg-[#07883e] text-sm font-semibold text-white shadow-md hover:bg-[#067533]"
+            >
+              আপডেট করুন
+            </button>
+          </form>
+
+          {/* Sign Out */}
+          <button
+            type="button"
+            onClick={handleSignOut}
+            className="btn mt-3 h-10 min-h-10 w-full rounded-lg border border-[#dce5dd] bg-transparent text-sm font-semibold text-[#253029] shadow-none hover:border-red-200 hover:bg-red-50 hover:text-red-600"
+          >
+            <LogOut size={16} />
+            সাইন আউট
+          </button>
+        </section>
+        {/* Back Home */}
+        <Link
+          href="/"
+          className="mt-6 flex items-center justify-center gap-1 text-sm text-[#7b857e] transition hover:text-[#07883e]"
+        >
+          <ArrowLeft size={14} />
+          হোম পেজে ফিরে যান
+        </Link>
+      </div>
+    </main>
+  );
+}

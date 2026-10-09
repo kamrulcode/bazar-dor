@@ -1,5 +1,4 @@
 import DatePage from "@/components/Date";
-import ProductCard from "@/components/ProductCard";
 import AllProductsSection from "@/components/sections/AllProductsSection";
 import PriceDecreaseSection from "@/components/sections/PriceDecreaseSection";
 import PriceIncreaseSection from "@/components/sections/PriceIncreaseSection";
@@ -30,7 +29,7 @@ const HomePage = () => {
               href={"/"}
               className="self-start  py-px px-4 bg-accent_color text-sm text-main_color flex items-center rounded-lg font-medium leading-5 h-10 "
             >
-              সাইন আপ
+              সব পণ্য দেখুন
             </Link>
           </div>
           <div>

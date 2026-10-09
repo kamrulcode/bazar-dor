@@ -17,9 +17,9 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en" data-theme="light" className={`${hindSiliguri.className}`}>
-      <body className="bg-back_color">
+      <body className="bg-back_color min-h-screen flex flex-col">
         <Header />
-        {children}
+        <main className="flex-1">{children}</main>
         <Footer />
       </body>
     </html>

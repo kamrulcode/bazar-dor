@@ -9,7 +9,7 @@ const Header = () => {
   return (
     <header>
       <div className="main-container navbar  px-4 py-3">
-        <div className="flex items-center flex-1 gap-2">
+        <Link href={"/"} className="flex items-center flex-1 gap-2">
           <Image
             src="/logo.png"
             width={48}
@@ -23,16 +23,16 @@ const Header = () => {
               <Date />
             </Suspense>
           </div>
-        </div>
+        </Link>
         <div className="flex flex-none ms-auto gap-2">
           <Link
-            href={"/"}
+            href={"/signin"}
             className="py-px px-4  flex items-center rounded-lg font-medium leading-5 h-10"
           >
             সাইন ইন
           </Link>
           <Link
-            href={"/"}
+            href={"/signup"}
             className="py-px px-4 bg-accent_color text-sm text-main_color flex items-center rounded-lg font-medium leading-5 h-10"
           >
             সাইন আপ

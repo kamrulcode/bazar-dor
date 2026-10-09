@@ -10,6 +10,7 @@ const AllProductsSection = async () => {
       <SectionTitle
         title="সব পণ্যের দাম"
         description="বাজারের সকল পণ্যের বর্তমান দাম"
+        icon={""}
       />
 
       <ProductGrid products={products} />

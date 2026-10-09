@@ -36,9 +36,9 @@
   --color-pricedown: var(--pricedown);
 
   --background-image-primary_gradient: linear-gradient(
-    135deg,
+    150deg,
     #f0fbea 0%,
-    #e2f8d8 50%,
+    #e2f8d8 40%,
     #d4f3c5 100%
   );
 }

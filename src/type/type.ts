@@ -7,6 +7,7 @@ export interface ProductT {
   id: number;
   slug: string;
   nameBn: string;
+  icon: string;
   category: string;
   categoryNameBn: string;
   categoryIcon: string;

@@ -1,3 +1,4 @@
+import { toBanglaNumber } from "@/fn/function";
 import { ProductT } from "@/type/type";
 import MarqueeText from "react-marquee-text";
 
@@ -9,11 +10,6 @@ const Marquee = async () => {
 
   console.log(products);
 
-  const toBanglaNumber = (value: number | string) => {
-    const banglaDigits = "০১২৩৪৫৬৭৮৯";
-
-    return String(value).replace(/\d/g, (digit) => banglaDigits[Number(digit)]);
-  };
   return (
     <MarqueeText duration={20} pauseOnHover={true} direction="right">
       <div className="flex  gap-6 border-y border-[#E1E8E1] py-2">
@@ -29,7 +25,7 @@ const Marquee = async () => {
                   className={` ${dir === "up" ? "text-priceup" : "text-pricedown"}`}
                 >
                   {dir === "up" ? "▲" : "▼"}
-                  {Math.abs(pct)}%
+                  {toBanglaNumber(Math.abs(pct))}%
                 </span>
               </div>
             );
