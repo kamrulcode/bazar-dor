@@ -8,8 +8,6 @@ const Marquee = async () => {
   );
   const products: ProductT[] = await res.json();
 
-  console.log(products);
-
   return (
     <MarqueeText duration={20} pauseOnHover={true} direction="right">
       <div className="flex  gap-6 border-y border-[#E1E8E1] py-2">

@@ -41,8 +41,19 @@
     #e2f8d8 40%,
     #d4f3c5 100%
   );
+
+  --background-image-footer_gradient: linear-gradient(
+    180deg,
+    #062b49 0%,
+    #041d31 100%
+  );
 }
 
 @utility main-container {
   @apply max-w-7xl mx-auto;
+}
+@utility main-shadow {
+  box-shadow:
+    0 4px 6px -4px rgba(0, 0, 0, 0.1),
+    0 10px 15px -3px rgba(0, 0, 0, 0.1);
 }

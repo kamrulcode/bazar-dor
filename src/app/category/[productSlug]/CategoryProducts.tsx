@@ -120,7 +120,7 @@ const CategoryProducts = ({
 
   return (
     <div>
-      <div className="flex  my-6 gap-10 rounded-xl border border-base-200 bg-base-100 p-4 shadow-sm transition hover:-translate-y-1 hover:shadow-md items-center">
+      <div className="flex  my-6 gap-10 rounded-xl border border-base-200 bg-base-100 p-4 shadow-sm transition  items-center">
         <div className="flex items-center justify-center h-18 w-18  rounded-xl bg-slate-200">
           <span className="text-3xl">{onlyCategory?.icon}</span>
         </div>

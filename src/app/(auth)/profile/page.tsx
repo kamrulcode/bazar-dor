@@ -101,7 +101,7 @@ export default function ProfilePage() {
           <button
             type="button"
             onClick={handleSignOut}
-            className="btn mt-3 h-10 min-h-10 w-full rounded-lg border border-[#dce5dd] bg-transparent text-sm font-semibold text-[#253029] shadow-none hover:border-red-200 hover:bg-red-50 hover:text-red-600"
+            className="btn mt-3 h-10 min-h-10 w-full rounded-lg text-[#D03739]  border border-red-500  text-sm font-semibold shadow-none hover:text-main_color hover:bg-[#D03739]"
           >
             <LogOut size={16} />
             সাইন আউট

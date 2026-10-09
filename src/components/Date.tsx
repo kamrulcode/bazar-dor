@@ -1,11 +1,11 @@
 "use client";
 
-const DatePage = () => {
+const DatePage = ({ color }: { color: string }) => {
   const date = new Date().toLocaleDateString("bn-BD", {
     dateStyle: "full",
   });
 
-  return <div className="text-xs">{date}</div>;
+  return <div className={`text-sm ${color}`}>{date}</div>;
 };
 
 export default DatePage;

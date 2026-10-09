@@ -1,5 +1,6 @@
 import { toBanglaNumber } from "@/fn/function";
 import type { ProductT } from "@/type/type";
+import Link from "next/link";
 
 interface ProductCardProps {
   p: ProductT;
@@ -22,7 +23,10 @@ const ProductCard = ({ p }: ProductCardProps) => {
   };
 
   return (
-    <article className="flex gap-10 rounded-xl border border-base-200 bg-base-100 p-4 shadow-sm transition hover:-translate-y-1 hover:shadow-md ">
+    <Link
+      href={`/product/${p.id}`}
+      className="flex gap-10 rounded-xl border border-base-200 bg-base-100 p-4 shadow-sm transition hover:-translate-y-1 hover:shadow-md "
+    >
       <div className="flex items-center justify-center h-25 w-25  rounded-xl bg-slate-200">
         <span className="text-6xl">{p.image}</span>
       </div>
@@ -61,7 +65,7 @@ const ProductCard = ({ p }: ProductCardProps) => {
           </div>
         </div>
       </div>
-    </article>
+    </Link>
   );
 };
 
