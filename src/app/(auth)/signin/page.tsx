@@ -5,6 +5,7 @@ import { ArrowLeft } from "lucide-react";
 import { useState } from "react";
 import { signIn } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
+import { FaGithub, FaGoogle } from "react-icons/fa";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -114,22 +115,32 @@ export default function LoginPage() {
           <div className="grid grid-cols-2 gap-2">
             <button
               type="button"
-              onClick={() => {
+              onClick={async () => {
                 // Connect Google OAuth here.
+                const data = await signIn.social({
+                  provider: "google",
+                });
+                console.log(data);
               }}
               className="btn h-10 min-h-10 gap-1 rounded-lg border border-[#dce5dd] bg-transparent px-2 text-xs font-semibold text-[#253029] shadow-none hover:bg-[#f0f5f0] sm:text-sm"
             >
-              <span className="text-base font-bold text-[#4285f4]">G</span>
+              <span className="text-base font-bold text-[#4285f4]">
+                <FaGoogle />
+              </span>
               Google দিয়ে চালিয়ে যান
             </button>
 
             <button
               type="button"
-              onClick={() => {
+              onClick={async () => {
                 // Connect GitHub OAuth here.
+                const data = await signIn.social({
+                  provider: "github",
+                });
               }}
               className="btn h-10 min-h-10 gap-1 rounded-lg border border-[#dce5dd] bg-transparent px-2 text-xs font-semibold text-[#253029] shadow-none hover:bg-[#f0f5f0] sm:text-sm"
             >
+              <FaGithub />
               GitHub দিয়ে চালিয়ে যান
             </button>
           </div>

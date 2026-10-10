@@ -5,6 +5,7 @@ import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { signUp } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
+import { FaGithub, FaGoogle } from "react-icons/fa";
 
 export default function SignUP() {
   const router = useRouter();
@@ -176,7 +177,9 @@ export default function SignUP() {
               }}
               className="btn h-10 min-h-10 gap-1.5 rounded-lg border border-[#dce5dd] bg-transparent px-2 text-xs font-semibold text-[#253029] shadow-none hover:bg-[#f0f5f0] sm:text-sm"
             >
-              <span className="text-base font-bold text-[#4285f4]">G</span>
+              <span className="text-base font-bold text-[#4285f4]">
+                <FaGoogle />
+              </span>
               Google দিয়ে চালিয়ে যান
             </button>
 
@@ -187,6 +190,7 @@ export default function SignUP() {
               }}
               className="btn h-10 min-h-10 gap-1.5 rounded-lg border border-[#dce5dd] bg-transparent px-2 text-xs font-semibold text-[#253029] shadow-none hover:bg-[#f0f5f0] sm:text-sm"
             >
+              <FaGithub />
               GitHub দিয়ে চালিয়ে যান
             </button>
           </div>

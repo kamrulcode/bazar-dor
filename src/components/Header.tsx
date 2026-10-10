@@ -64,7 +64,12 @@ const Header = () => {
               <div className="avatar sm:visible invisible">
                 <div className="ring-green-300 ring-offset-green-100 w-7 rounded-sm ring-2 ring-offset-2 flex felx items-center justify-center ">
                   {session.user?.image ? (
-                    <Image src={""} height={40} width={40} alt="profile" />
+                    <Image
+                      src={session.user?.image}
+                      height={40}
+                      width={40}
+                      alt="profile"
+                    />
                   ) : (
                     <p className="font-bold uppercase  text-xl">
                       {session.user?.name.trim().slice(0, 1)}

@@ -3,18 +3,18 @@
 import { useState } from "react";
 import Link from "next/link";
 import { LogOut, ArrowLeft, UserRound } from "lucide-react";
-import { signOut, useSession } from "@/lib/auth-client";
+import { signOut, updateUser, useSession } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 export default function ProfilePage() {
   const { data: session } = useSession();
-  const [name, setName] = useState("");
-  const [updatedName, setUpdatedName] = useState("upadate your name");
+  const [updatedName, setUpdatedName] = useState();
   const router = useRouter();
 
   const [message, setMessage] = useState("");
 
-  const handleUpdate = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleUpdate = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (!updatedName.trim()) {
@@ -22,7 +22,9 @@ export default function ProfilePage() {
       return;
     }
 
-    setName(updatedName.trim());
+    const data = await updateUser({
+      name: updatedName.trim(),
+    });
     setMessage("আপনার প্রোফাইল সফলভাবে আপডেট হয়েছে!");
   };
 
@@ -51,7 +53,16 @@ export default function ProfilePage() {
           <div className="flex flex-col items-center">
             <div className="avatar placeholder">
               <div className="flex h-24 w-24 items-center justify-center overflow-hidden rounded-full border-4 border-white bg-[#e0eee3] text-[#07883e] shadow-sm">
-                <UserRound size={48} strokeWidth={1.5} />
+                {session?.user.image ? (
+                  <Image
+                    src={session?.user.image}
+                    width={96}
+                    height={96}
+                    alt="profile"
+                  />
+                ) : (
+                  <UserRound size={48} strokeWidth={1.5} />
+                )}
               </div>
             </div>
 
