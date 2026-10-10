@@ -4,8 +4,7 @@
 
 # <a></a>
 
-| <img src="./public/logo.png" alt="Features" width="50"/> | <a  style="font-size: 42px; ">বাজার দর</a> |
-| -------------------------------------------------------- | ------------------------------------------ |
+<img src="./public/readmelogo.png" alt="Features" width="300"/>
 
 ### Know the Price. Shop with Confidence.
 
