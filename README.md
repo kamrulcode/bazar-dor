@@ -235,8 +235,8 @@ Please ensure your changes follow the project's existing coding conventions. -->
 
 Full-Stack Developer in progress · React · Next.js · TypeScript
 
-- GitHub: [Your GitHub Profile](https://github.com/)
-- LinkedIn: [Connect on LinkedIn](https://www.linkedin.com/in/kamruliislam/)
+- Project: [Live Project Link](https://bazzardor.vercel.app)
+- LinkedIn: [Connect on LinkedIn](https://www.linkedin.com/in/kamruliislam)
 
 ---
 
