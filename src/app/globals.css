@@ -50,7 +50,7 @@
 }
 
 @utility main-container {
-  @apply max-w-7xl mx-auto px-10 xl:px-0;
+  @apply max-w-7xl mx-auto px-6 xl:px-0;
 }
 @utility main-shadow {
   box-shadow:

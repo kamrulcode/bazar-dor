@@ -6,27 +6,25 @@ import { LogOut, ArrowLeft, UserRound } from "lucide-react";
 import { signOut, updateUser, useSession } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-import { useToast } from "@/context/ToastContext";
+import toast from "react-hot-toast";
 
 export default function ProfilePage() {
   const { data: session } = useSession();
   const [updatedName, setUpdatedName] = useState("");
   const router = useRouter();
 
-  const { success, showToast } = useToast();
-
   const handleUpdate = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (!updatedName.trim()) {
-      showToast("নাম লিখুন।");
+      toast.error("নাম লিখুন।");
       return;
     }
 
     const data = await updateUser({
       name: updatedName.trim(),
     });
-    success("আপনার প্রোফাইল সফলভাবে আপডেট হয়েছে!");
+    toast.success("আপনার প্রোফাইল সফলভাবে আপডেট হয়েছে!");
     console.log(data);
   };
 

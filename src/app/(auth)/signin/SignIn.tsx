@@ -6,7 +6,7 @@ import { useState } from "react";
 import { signIn } from "@/lib/auth-client";
 import { useRouter, useSearchParams } from "next/navigation";
 import { FaGithub, FaGoogle } from "react-icons/fa";
-import { useToast } from "@/context/ToastContext";
+import toast from "react-hot-toast";
 
 export default function SignIn() {
   const [email, setEmail] = useState("");
@@ -14,7 +14,8 @@ export default function SignIn() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const callbackUrl = searchParams?.get("callbackUrl");
-  const { success, error } = useToast();
+  const [showPassword, setShowPassword] = useState(false);
+
   const redirectTo =
     callbackUrl?.startsWith("/") && !callbackUrl.startsWith("//")
       ? callbackUrl
@@ -30,19 +31,19 @@ export default function SignIn() {
       });
 
       if (signInError) {
-        error(signInError.message || "সাইন ইন করা যায়নি!");
+        toast.error(signInError.message || "সাইন ইন করা যায়নি!");
         return;
       }
 
       // Show the toast before redirecting
-      success("সফলভাবে সাইন ইন হয়েছে।", 2000);
+      toast.success("সফলভাবে সাইন ইন হয়েছে।");
       // Wait 2 seconds so the user can see the toast
       setTimeout(() => {
         router.replace(redirectTo);
       }, 2000);
     } catch (err) {
       console.error("Sign-in failed:", err);
-      error("কিছু একটা সমস্যা হয়েছে। আবার চেষ্টা করুন।");
+      toast.error("কিছু একটা সমস্যা হয়েছে। আবার চেষ্টা করুন।");
     }
   };
 
@@ -83,21 +84,49 @@ export default function SignIn() {
 
             {/* Password */}
             <div className="form-control">
-              <label htmlFor="password" className="mb-1.5 text-sm font-medium">
-                পাসওয়ার্ড
+              <label
+                htmlFor="confirmPassword"
+                className="mb-1.5 text-sm font-medium"
+              >
+                পাসওয়ার্ড নিশ্চিত করুন
               </label>
-
-              <input
-                id="password"
-                type="password"
-                name="password"
-                placeholder="কমপক্ষে ৮ অক্ষর"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                autoComplete="current-password"
-                required
-                className="input h-10 min-h-10 w-full rounded-lg border border-[#dce5dd] bg-transparent px-3 text-sm outline-none focus:border-[#07883e] focus:outline-none"
-              />
+              <label className="input validator w-full focus:outline-none outline-none">
+                <svg
+                  className="h-[1em] opacity-50"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                >
+                  <g
+                    strokeLinejoin="round"
+                    strokeLinecap="round"
+                    strokeWidth="2.5"
+                    fill="none"
+                    stroke="currentColor"
+                  >
+                    <path d="M2.586 17.414A2 2 0 0 0 2 18.828V21a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h1a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h.172a2 2 0 0 0 1.414-.586l.814-.814a6.5 6.5 0 1 0-4-4z"></path>
+                    <circle
+                      cx="16.5"
+                      cy="7.5"
+                      r=".5"
+                      fill="currentColor"
+                    ></circle>
+                  </g>
+                </svg>
+                <input
+                  required
+                  type={showPassword ? "text" : "password"}
+                  id="password"
+                  name="password"
+                  placeholder="কমপক্ষে ৮ অক্ষর"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  autoComplete="current-password"
+                  minLength={8}
+                />
+                <p onClick={() => setShowPassword(!showPassword)}>
+                  {showPassword ? "Hide" : "Show"}
+                </p>
+              </label>
             </div>
 
             {/* Submit */}

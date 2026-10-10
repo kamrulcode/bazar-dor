@@ -1,5 +1,6 @@
 import React, { Suspense } from "react";
 import ProductDetails from "./ProductDetails";
+import ProductGridSkeleton from "@/components/skeletons/ProductGridSkeleton";
 
 const ProductDetailsPage = ({
   params,
@@ -8,7 +9,7 @@ const ProductDetailsPage = ({
 }) => {
   return (
     <div>
-      <Suspense fallback={"loading..."}>
+      <Suspense fallback={<ProductGridSkeleton />}>
         <ProductDetails params={params} />
       </Suspense>
     </div>

@@ -32,7 +32,7 @@ const ProductCard = ({ p }: ProductCardProps) => {
           ? `/product/${p.id}`
           : `/signin?callbackUrl=${encodeURIComponent(`/product/${p.id}`)}`
       }
-      className="flex gap-10 rounded-xl border border-base-200 bg-base-100 p-4 shadow-sm transition hover:-translate-y-1 hover:shadow-md "
+      className="flex gap-4 sm:gap-10 rounded-xl border border-base-200 bg-base-100 p-4 shadow-sm transition hover:-translate-y-1 hover:shadow-md "
     >
       <div className="flex items-center justify-center h-25 w-25  rounded-xl bg-slate-200">
         <span className="text-6xl">{p.image}</span>

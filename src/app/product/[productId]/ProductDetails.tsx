@@ -4,7 +4,7 @@ import type { ProductT, MarketT } from "@/type/type";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
-const API_URL = "https://api.api-store.workers.dev/api/bazardor/products";
+const API_URL = "https://openapi.programming-hero.com/api/bazardor/products";
 
 function formatPrice(value: number | null | undefined): string {
   if (value == null || !Number.isFinite(value)) return "—";
@@ -152,8 +152,8 @@ export default function ProductDetails({
 
         {/* Product Header */}
         <section className="card mb-3 border border-[#e5ece6] bg-[#fbfdfb] shadow-none">
-          <div className="card-body flex flex-row items-center gap-3 p-3 sm:p-4">
-            <div className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-gray-200 text-5xl w-20 h-20 ">
+          <div className="card-body sm:flex sm:flex-row items-center gap-3 p-3 sm:p-4">
+            <div className="flex shrink-0 items-center justify-center rounded-xl bg-gray-200 sm:text-5xl text-2xl sm:w-20 w-10 sm:h-20 h-10 ">
               {product?.image ?? product?.categoryIcon ?? "🥬"}
             </div>
 
@@ -174,10 +174,10 @@ export default function ProductDetails({
               </p>
             </div>
 
-            <div className="min-w-19 rounded-xl bg-[#f0f5f0] px-3 py-2 text-center">
+            <div className="min-w-19 rounded-xl bg-[#f0f5f0] px-3 py-2 text-center sm:block flex">
               <p className="text-sm text-base-content/60">আজকের দাম</p>
 
-              <p className="text-4xl font-extrabold">
+              <p className="text-xl sm:text-4xl font-extrabold">
                 {product ? product.today.toLocaleString("bn-BD") : "—"}
               </p>
 

@@ -5,7 +5,8 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Marquee from "@/components/Marquee";
 import { Suspense } from "react";
-import { ToastProvider } from "@/context/ToastContext";
+import { Toaster } from "react-hot-toast";
+import MarqueeSkeleton from "@/components/skeletons/MarqueeSkeleton";
 
 const hindSiliguri = Hind_Siliguri({
   weight: ["300", "400", "500", "600", "700"],
@@ -21,14 +22,13 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en" data-theme="light" className={`${hindSiliguri.className}`}>
       <body className="bg-back_color min-h-screen flex flex-col">
-        <ToastProvider>
-          <Header />
-          <Suspense fallback="loading ...">
-            <Marquee />
-          </Suspense>
-          <main className="flex-1">{children}</main>
-          <Footer />
-        </ToastProvider>
+        <Header />
+        <Suspense fallback={<MarqueeSkeleton />}>
+          <Marquee />
+        </Suspense>
+        <main className="flex-1">{children}</main>
+        <Footer />
+        <Toaster />
       </body>
     </html>
   );

@@ -6,7 +6,7 @@ const AllProductsSection = async () => {
   const products = await getProducts();
 
   return (
-    <section className="py-8">
+    <section className="py-8" id="সব-পণ্য">
       <SectionTitle
         title="সব পণ্যের দাম"
         description="বাজারের সকল পণ্যের বর্তমান দাম"

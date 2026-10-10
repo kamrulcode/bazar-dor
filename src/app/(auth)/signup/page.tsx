@@ -6,9 +6,10 @@ import { ArrowLeft } from "lucide-react";
 import { signUp } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
 import { FaGithub, FaGoogle } from "react-icons/fa";
-import { useToast } from "@/context/ToastContext";
+import toast from "react-hot-toast";
 
 export default function SignUP() {
+  const [showPassword, setShowPassword] = useState(false);
   const router = useRouter();
   const [formData, setFormData] = useState({
     name: "",
@@ -16,8 +17,6 @@ export default function SignUP() {
     password: "",
     confirmPassword: "",
   });
-
-  const { success, error } = useToast();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
@@ -30,12 +29,12 @@ export default function SignUP() {
     e.preventDefault();
 
     if (formData.password !== formData.confirmPassword) {
-      error("পাসওয়ার্ড দুটি মিলছে না!");
+      toast.error("পাসওয়ার্ড দুটি মিলছে না!");
       return;
     }
 
     if (formData.password.length < 8) {
-      error("পাসওয়ার্ড কমপক্ষে ৮ অক্ষরের হতে হবে!");
+      toast.error("পাসওয়ার্ড কমপক্ষে ৮ অক্ষরের হতে হবে!");
       return;
     }
 
@@ -50,18 +49,18 @@ export default function SignUP() {
       });
 
       if (signUPerror) {
-        console.error("Registration error:", error);
-        error(signUPerror.message || "অ্যাকাউন্ট তৈরি করা যায়নি!");
+        console.error("Registration error:", signUPerror);
+        toast.error(signUPerror.message || "অ্যাকাউন্ট তৈরি করা যায়নি!");
         return;
       }
-      success("অ্যাকাউন্ট তৈরি হয়েছে!");
+      toast.success("অ্যাকাউন্ট তৈরি হয়েছে!");
       router.push("/");
       router.refresh();
 
       // console.log("Registration successful:", data);
     } catch (err) {
       console.error("Signup failed:", err);
-      error("কিছু একটা সমস্যা হয়েছে। আবার চেষ্টা করুন।");
+      toast.error("কিছু একটা সমস্যা হয়েছে। আবার চেষ্টা করুন।");
     }
   };
 
@@ -118,20 +117,57 @@ export default function SignUP() {
 
             {/* Password */}
             <div className="form-control">
-              <label htmlFor="password" className="mb-1.5 text-sm font-medium">
+              <label
+                htmlFor="confirmPassword"
+                className="mb-1.5 text-sm font-medium"
+              >
                 পাসওয়ার্ড
               </label>
-              <input
-                id="password"
-                name="password"
-                type="password"
-                placeholder="কমপক্ষে ৮ অক্ষর"
-                value={formData.password}
-                onChange={handleChange}
-                minLength={8}
-                className="input h-10 min-h-10 w-full rounded-lg border border-[#dce5dd] bg-transparent px-3 text-sm outline-none focus:border-[#07883e] focus:outline-none"
-                required
-              />
+              <label className="input validator w-full focus:outline-none outline-none">
+                <svg
+                  className="h-[1em] opacity-50"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                >
+                  <g
+                    strokeLinejoin="round"
+                    strokeLinecap="round"
+                    strokeWidth="2.5"
+                    fill="none"
+                    stroke="currentColor"
+                  >
+                    <path d="M2.586 17.414A2 2 0 0 0 2 18.828V21a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h1a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h.172a2 2 0 0 0 1.414-.586l.814-.814a6.5 6.5 0 1 0-4-4z"></path>
+                    <circle
+                      cx="16.5"
+                      cy="7.5"
+                      r=".5"
+                      fill="currentColor"
+                    ></circle>
+                  </g>
+                </svg>
+                <input
+                  required
+                  id="password"
+                  name="password"
+                  type={showPassword ? "text" : "password"}
+                  placeholder="কমপক্ষে ৮ অক্ষর"
+                  value={formData.password}
+                  onChange={handleChange}
+                  minLength={8}
+                  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                  title="Must be more than 8 characters, including number, lowercase letter, uppercase letter"
+                />
+                <p onClick={() => setShowPassword(!showPassword)}>
+                  {showPassword ? "Hide" : "Show"}
+                </p>
+              </label>
+              <p className="validator-hint hidden">
+                Must be more than 8 characters, including
+                <br />
+                At least one number <br />
+                At least one lowercase letter <br />
+                At least one uppercase letter
+              </p>
             </div>
 
             {/* Confirm Password */}
@@ -142,17 +178,42 @@ export default function SignUP() {
               >
                 পাসওয়ার্ড নিশ্চিত করুন
               </label>
-              <input
-                id="confirmPassword"
-                name="confirmPassword"
-                type="password"
-                placeholder="আবার লিখুন"
-                value={formData.confirmPassword}
-                onChange={handleChange}
-                minLength={8}
-                className="input h-10 min-h-10 w-full rounded-lg border border-[#dce5dd] bg-transparent px-3 text-sm outline-none focus:border-[#07883e] focus:outline-none"
-                required
-              />
+              <label className="input validator w-full focus:outline-none outline-none">
+                <svg
+                  className="h-[1em] opacity-50"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                >
+                  <g
+                    strokeLinejoin="round"
+                    strokeLinecap="round"
+                    strokeWidth="2.5"
+                    fill="none"
+                    stroke="currentColor"
+                  >
+                    <path d="M2.586 17.414A2 2 0 0 0 2 18.828V21a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h1a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h.172a2 2 0 0 0 1.414-.586l.814-.814a6.5 6.5 0 1 0-4-4z"></path>
+                    <circle
+                      cx="16.5"
+                      cy="7.5"
+                      r=".5"
+                      fill="currentColor"
+                    ></circle>
+                  </g>
+                </svg>
+                <input
+                  required
+                  id="confirmPassword"
+                  name="confirmPassword"
+                  type={showPassword ? "text" : "password"}
+                  placeholder="আবার লিখুন"
+                  value={formData.confirmPassword}
+                  onChange={handleChange}
+                  minLength={8}
+                />
+                <p onClick={() => setShowPassword(!showPassword)}>
+                  {showPassword ? "Hide" : "Show"}
+                </p>
+              </label>
             </div>
 
             {/* Submit */}

@@ -1,6 +1,7 @@
 "use client";
 
 import ProductGrid from "@/components/ProductGrid";
+import { CategorySkeletons } from "@/components/skeletons/CategorySkeletons";
 import { toBanglaNumber } from "@/fn/function";
 import { ProductT } from "@/type/type";
 import { useEffect, useMemo, useState } from "react";
@@ -29,7 +30,7 @@ const CategoryProducts = ({
         const { productSlug } = await params;
 
         const res = await fetch(
-          `https://api.api-store.workers.dev/api/bazardor/products?category=${encodeURIComponent(productSlug)}`,
+          `https://openapi.programming-hero.com/api/bazardor/products?category=${encodeURIComponent(productSlug)}`,
         );
 
         if (!res.ok) {
@@ -70,7 +71,7 @@ const CategoryProducts = ({
         const { productSlug } = await params;
 
         const res = await fetch(
-          `https://api.api-store.workers.dev/api/bazardor/categories/${encodeURIComponent(productSlug)}`,
+          `https://openapi.programming-hero.com/api/bazardor/categories/${encodeURIComponent(productSlug)}`,
         );
 
         if (!res.ok) {
@@ -111,7 +112,7 @@ const CategoryProducts = ({
   }, [categoryData, sortOrder]);
 
   if (loading) {
-    return <p className="py-6">পণ্য লোড হচ্ছে...</p>;
+    return <CategorySkeletons />;
   }
 
   if (error) {
@@ -120,7 +121,7 @@ const CategoryProducts = ({
 
   return (
     <div>
-      <div className="flex  my-6 gap-10 rounded-xl border border-base-200 bg-base-100 p-4 shadow-sm transition  items-center">
+      <div className="flex  my-6 gap-4 sm:gap-10 rounded-xl border border-base-200 bg-base-100 p-4 shadow-sm transition  items-center">
         <div className="flex items-center justify-center h-18 w-18  rounded-xl bg-slate-200">
           <span className="text-3xl">{onlyCategory?.icon}</span>
         </div>
@@ -128,16 +129,16 @@ const CategoryProducts = ({
           <div>
             <h3 className="font-semibold text-xl">{onlyCategory?.nameBn}</h3>
 
-            <p className="text-base text-base-content/60">
+            <p className="text-sm sm:text-base text-base-content/60">
               {toBanglaNumber(sortedProducts.length)}টি পণ্যের আজকের দাম ও
               পরিবর্তন
             </p>
           </div>
         </div>
       </div>
-      <div className="flex items-center justify-between gap-3 py-3">
+      <div className="sm:flex items-center justify-between gap-3 py-3 ">
         <p>মোট {toBanglaNumber(sortedProducts.length)}টি পণ্য দেখানো হচ্ছে </p>
-        <div className="flex items-center gap-3">
+        <div className="mt-3 sm:mt-0 flex items-center gap-3">
           <label htmlFor="sortOrder" className="text-sm font-medium">
             সাজান:
           </label>
