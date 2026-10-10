@@ -3,15 +3,39 @@
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { useState } from "react";
+import { signIn } from "@/lib/auth-client";
+import { useRouter } from "next/navigation";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const router = useRouter();
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     // Connect your authentication API here.
+    try {
+      const { data, error } = await signIn.email({
+        email: email,
+        password: password,
+        callbackURL: "/",
+      });
+
+      if (error) {
+        console.error("Registration error:", error);
+        alert(error.message || "অ্যাকাউন্ট তৈরি করা যায়নি!");
+        return;
+      }
+
+      router.push("/");
+      router.refresh();
+
+      // console.log("Registration successful:", data);
+    } catch (err) {
+      console.error("Signup failed:", err);
+      alert("কিছু একটা সমস্যা হয়েছে। আবার চেষ্টা করুন।");
+    }
     console.log({ email, password });
   };
 
@@ -114,7 +138,7 @@ export default function LoginPage() {
           <p className="mt-4 text-center text-sm">
             অ্যাকাউন্ট নেই?{" "}
             <Link
-              href="/register"
+              href="/signup"
               className="font-medium text-[#07883e] hover:underline"
             >
               সাইন আপ করুন

@@ -3,10 +3,15 @@
 import { useState } from "react";
 import Link from "next/link";
 import { LogOut, ArrowLeft, UserRound } from "lucide-react";
+import { signOut, useSession } from "@/lib/auth-client";
+import { useRouter } from "next/navigation";
 
 export default function ProfilePage() {
-  const [name, setName] = useState("রহিম উদ্দিন");
-  const [updatedName, setUpdatedName] = useState("রহিম উদ্দিন");
+  const { data: session } = useSession();
+  const [name, setName] = useState("");
+  const [updatedName, setUpdatedName] = useState("upadate your name");
+  const router = useRouter();
+
   const [message, setMessage] = useState("");
 
   const handleUpdate = (e: React.FormEvent<HTMLFormElement>) => {
@@ -22,7 +27,8 @@ export default function ProfilePage() {
   };
 
   const handleSignOut = () => {
-    // Connect your authentication sign-out function here.
+    signOut();
+    router.push("/");
   };
 
   return (
@@ -49,7 +55,7 @@ export default function ProfilePage() {
               </div>
             </div>
 
-            <h2 className="mt-4 text-xl font-bold">{name}</h2>
+            <h2 className="mt-4 text-xl font-bold">{session?.user.name}</h2>
             <p className="mt-1 text-sm text-[#737d75]">আপনার অ্যাকাউন্ট</p>
           </div>
 

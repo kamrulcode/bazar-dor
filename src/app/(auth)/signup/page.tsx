@@ -3,8 +3,11 @@
 import { useState } from "react";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
+import { signUp } from "@/lib/auth-client";
+import { useRouter } from "next/navigation";
 
 export default function SignUP() {
+  const router = useRouter();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -19,7 +22,7 @@ export default function SignUP() {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (formData.password !== formData.confirmPassword) {
@@ -33,7 +36,29 @@ export default function SignUP() {
     }
 
     // Connect your registration API here.
-    console.log("Registration data:", formData);
+
+    try {
+      const { data, error } = await signUp.email({
+        name: formData.name,
+        email: formData.email,
+        password: formData.password,
+        callbackURL: "/",
+      });
+
+      if (error) {
+        console.error("Registration error:", error);
+        alert(error.message || "অ্যাকাউন্ট তৈরি করা যায়নি!");
+        return;
+      }
+
+      router.push("/");
+      router.refresh();
+
+      // console.log("Registration successful:", data);
+    } catch (err) {
+      console.error("Signup failed:", err);
+      alert("কিছু একটা সমস্যা হয়েছে। আবার চেষ্টা করুন।");
+    }
   };
 
   return (
@@ -170,7 +195,7 @@ export default function SignUP() {
           <p className="mt-4 text-center text-sm">
             অ্যাকাউন্টটি আছে?{" "}
             <Link
-              href="/login"
+              href="/signin"
               className="font-medium text-[#07883e] hover:underline"
             >
               সাইন ইন করুন

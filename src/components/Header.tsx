@@ -4,8 +4,11 @@ import { Suspense, useState, useEffect, useRef } from "react";
 import Date from "./Date";
 import Link from "next/link";
 import NavLinks from "./NavLinks";
+import { signOut, useSession } from "@/lib/auth-client";
 
 const Header = () => {
+  const { data: session } = useSession();
+  console.log(session);
   const [isActive, setIsActive] = useState(false);
   const dropdownRef = useRef<HTMLLIElement>(null);
 
@@ -56,46 +59,77 @@ const Header = () => {
           </div>
         </Link>
         <div className="flex flex-none ms-auto gap-2">
-          <ul className="flex items-center gap-2">
-            <div className="avatar sm:visible invisible">
-              <div className="ring-green-300 ring-offset-green-100 w-7 rounded-sm ring-2 ring-offset-2">
-                <Image src={"/next.svg"} height={40} width={40} alt="profile" />
-              </div>
-            </div>
-
-            <li ref={dropdownRef} className="relative">
-              <div>
-                <div
-                  onClick={handleClick}
-                  className="flex items-center cursor-pointer"
-                >
-                  <h1 className="text-lg font-medium pl-2 pr-1 text-green-900">
-                    Parent
-                  </h1>{" "}
-                  <span className="text-xs">⏷</span>
+          {session?.user ? (
+            <ul className="flex items-center gap-2">
+              <div className="avatar sm:visible invisible">
+                <div className="ring-green-300 ring-offset-green-100 w-7 rounded-sm ring-2 ring-offset-2 flex felx items-center justify-center ">
+                  {session.user?.image ? (
+                    <Image src={""} height={40} width={40} alt="profile" />
+                  ) : (
+                    <p className="font-bold uppercase  text-xl">
+                      {session.user?.name.trim().slice(0, 1)}
+                    </p>
+                  )}
                 </div>
-                <div
-                  className={`absolute top-10 right-0 w-66 h-42 p-4 rounded-lg bg-[#FAFCFA] main-shadow ${
-                    isActive ? "visible" : "invisible"
-                  }`}
-                >
-                  <h3 className="text-lg font-medium leading-5">full name</h3>
-                  <p className="text-sm font-normal leading-4 pb-2">email</p>
-                  <div className="py-2 border-t border-slate-300 mb-2 cursor-pointer">
-                    <Link href={"/profile"} className="font-normal text-base ">
-                      👤 আমার প্রোফাইল
+              </div>
+
+              <li ref={dropdownRef} className="relative">
+                <div>
+                  <div
+                    onClick={handleClick}
+                    className="flex items-center cursor-pointer"
+                  >
+                    <h1 className="text-xl font-medium pl-2 pr-1 text-green-900 uppercase">
+                      {session.user?.name.trim().split(" ")[0]}
+                    </h1>{" "}
+                    <span className="text-xs">⏷</span>
+                  </div>
+                  <div
+                    className={`absolute top-10 right-0 w-66 h-42 p-4 rounded-lg bg-[#FAFCFA] main-shadow ${
+                      isActive ? "visible" : "invisible"
+                    }`}
+                  >
+                    <h3 className="text-lg font-medium leading-5 capitalize text-slate-600">
+                      {session.user?.name}
+                    </h3>
+                    <p className="text-sm font-normal leading-4 pb-2 text-slate-400">
+                      {session.user?.email}
+                    </p>
+                    <div className="py-2 border-t border-slate-300 mb-2 cursor-pointer">
+                      <Link
+                        href={"/profile"}
+                        className="font-normal text-base "
+                      >
+                        👤 আমার প্রোফাইল
+                      </Link>
+                    </div>
+                    <Link
+                      href={"/"}
+                      onClick={() => signOut()}
+                      className="text-base cursor-pointer font-normal leading-5 text-[#D03739] hover:text-main_color hover:bg-[#D03739] border border-red-500 rounded-lg px-3 py-1"
+                    >
+                      ↩︎ সাইন আউট
                     </Link>
                   </div>
-                  <Link
-                    href={"/"}
-                    className="text-base cursor-pointer font-normal leading-5 text-[#D03739] hover:text-main_color hover:bg-[#D03739] border border-red-500 rounded-lg px-3 py-1"
-                  >
-                    ↩︎ সাইন আউট
-                  </Link>
                 </div>
-              </div>
-            </li>
-          </ul>
+              </li>
+            </ul>
+          ) : (
+            <div className="flex items-center justify-center gap-2">
+              <Link
+                className="  py-px px-4  text-base  flex items-center rounded-lg font-medium leading-5 h-10 hover:bg-accent_color/20"
+                href={"/signin"}
+              >
+                সাইন ইন
+              </Link>
+              <Link
+                className=" py-px px-4 bg-accent_color/90 text-base text-main_color flex items-center rounded-lg font-medium leading-5 h-10 hover:bg-accent_color"
+                href={"/signup"}
+              >
+                সাইন আপ
+              </Link>
+            </div>
+          )}
         </div>
       </div>
       <Suspense fallback="loading ...">
