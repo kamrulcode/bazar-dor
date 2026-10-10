@@ -6,6 +6,7 @@ import { ArrowLeft } from "lucide-react";
 import { signUp } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
 import { FaGithub, FaGoogle } from "react-icons/fa";
+import { useToast } from "@/context/ToastContext";
 
 export default function SignUP() {
   const router = useRouter();
@@ -15,6 +16,8 @@ export default function SignUP() {
     password: "",
     confirmPassword: "",
   });
+
+  const { success, error } = useToast();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
@@ -27,43 +30,43 @@ export default function SignUP() {
     e.preventDefault();
 
     if (formData.password !== formData.confirmPassword) {
-      alert("পাসওয়ার্ড দুটি মিলছে না!");
+      error("পাসওয়ার্ড দুটি মিলছে না!");
       return;
     }
 
     if (formData.password.length < 8) {
-      alert("পাসওয়ার্ড কমপক্ষে ৮ অক্ষরের হতে হবে!");
+      error("পাসওয়ার্ড কমপক্ষে ৮ অক্ষরের হতে হবে!");
       return;
     }
 
     // Connect your registration API here.
 
     try {
-      const { data, error } = await signUp.email({
+      const { error: signUPerror } = await signUp.email({
         name: formData.name,
         email: formData.email,
         password: formData.password,
         callbackURL: "/",
       });
 
-      if (error) {
+      if (signUPerror) {
         console.error("Registration error:", error);
-        alert(error.message || "অ্যাকাউন্ট তৈরি করা যায়নি!");
+        error(signUPerror.message || "অ্যাকাউন্ট তৈরি করা যায়নি!");
         return;
       }
-
+      success("অ্যাকাউন্ট তৈরি হয়েছে!");
       router.push("/");
       router.refresh();
 
       // console.log("Registration successful:", data);
     } catch (err) {
       console.error("Signup failed:", err);
-      alert("কিছু একটা সমস্যা হয়েছে। আবার চেষ্টা করুন।");
+      error("কিছু একটা সমস্যা হয়েছে। আবার চেষ্টা করুন।");
     }
   };
 
   return (
-    <main className="min-h-screen bg-[#f0f5f0] px-4 py-10 text-[#253029] sm:py-9">
+    <main className="py-10 bg-[#f0f5f0] px-4  text-[#253029] ">
       {" "}
       <div className="mx-auto w-full max-w-104">
         {/* Header */}{" "}

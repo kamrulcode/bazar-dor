@@ -1,4 +1,6 @@
+"use client";
 import { toBanglaNumber } from "@/fn/function";
+import { useSession } from "@/lib/auth-client";
 import type { ProductT } from "@/type/type";
 import Link from "next/link";
 
@@ -7,6 +9,7 @@ interface ProductCardProps {
 }
 
 const ProductCard = ({ p }: ProductCardProps) => {
+  const { data: session } = useSession();
   const isUp = p.change.dir === "up";
   const isDown = p.change.dir === "down";
 
@@ -24,7 +27,11 @@ const ProductCard = ({ p }: ProductCardProps) => {
 
   return (
     <Link
-      href={`/product/${p.id}`}
+      href={
+        session?.user
+          ? `/product/${p.id}`
+          : `/signin?callbackUrl=${encodeURIComponent(`/product/${p.id}`)}`
+      }
       className="flex gap-10 rounded-xl border border-base-200 bg-base-100 p-4 shadow-sm transition hover:-translate-y-1 hover:shadow-md "
     >
       <div className="flex items-center justify-center h-25 w-25  rounded-xl bg-slate-200">

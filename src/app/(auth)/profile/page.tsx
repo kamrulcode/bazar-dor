@@ -6,26 +6,28 @@ import { LogOut, ArrowLeft, UserRound } from "lucide-react";
 import { signOut, updateUser, useSession } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import { useToast } from "@/context/ToastContext";
 
 export default function ProfilePage() {
   const { data: session } = useSession();
-  const [updatedName, setUpdatedName] = useState();
+  const [updatedName, setUpdatedName] = useState("");
   const router = useRouter();
 
-  const [message, setMessage] = useState("");
+  const { success, showToast } = useToast();
 
   const handleUpdate = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (!updatedName.trim()) {
-      setMessage("নাম লিখুন।");
+      showToast("নাম লিখুন।");
       return;
     }
 
     const data = await updateUser({
       name: updatedName.trim(),
     });
-    setMessage("আপনার প্রোফাইল সফলভাবে আপডেট হয়েছে!");
+    success("আপনার প্রোফাইল সফলভাবে আপডেট হয়েছে!");
+    console.log(data);
   };
 
   const handleSignOut = () => {
@@ -85,26 +87,12 @@ export default function ProfilePage() {
                 value={updatedName}
                 onChange={(e) => {
                   setUpdatedName(e.target.value);
-                  setMessage("");
                 }}
                 placeholder="আপনার নাম লিখুন"
                 className="input h-10 min-h-10 w-full rounded-lg border border-[#dce5dd] bg-transparent px-3 text-sm outline-none focus:border-[#07883e] focus:outline-none"
                 required
               />
             </div>
-
-            {message && (
-              <p
-                role="status"
-                className={`text-sm ${
-                  message.includes("সফলভাবে")
-                    ? "text-[#07883e]"
-                    : "text-red-600"
-                }`}
-              >
-                {message}
-              </p>
-            )}
 
             <button
               type="submit"

@@ -7,13 +7,13 @@ import NavLinks from "./NavLinks";
 import { signOut, useSession } from "@/lib/auth-client";
 
 const Header = () => {
-  const { data: session } = useSession();
-  console.log(session);
   const [isActive, setIsActive] = useState(false);
   const dropdownRef = useRef<HTMLLIElement>(null);
+  const { data: session } = useSession();
+  console.log(session);
 
   const handleClick = () => {
-    setIsActive(!isActive);
+    setIsActive((prev) => !prev);
   };
 
   // Safe side-effect management for both click outside AND route change updates
@@ -84,14 +84,16 @@ const Header = () => {
                     onClick={handleClick}
                     className="flex items-center cursor-pointer"
                   >
-                    <h1 className="text-xl font-medium pl-2 pr-1 text-green-900 uppercase">
+                    <h1 className="text-base font-semibold pl-2 pr-1 text-green-900 uppercase">
                       {session.user?.name.trim().split(" ")[0]}
                     </h1>{" "}
                     <span className="text-xs">⏷</span>
                   </div>
                   <div
-                    className={`absolute top-10 right-0 w-66 h-42 p-4 rounded-lg bg-[#FAFCFA] main-shadow ${
-                      isActive ? "visible" : "invisible"
+                    className={`absolute top-10 right-0 z-50 w-66 h-42 p-4 rounded-lg bg-[#FAFCFA] main-shadow transition-opacity duration-150 ${
+                      isActive
+                        ? "visible opacity-100"
+                        : "invisible opacity-0 pointer-events-none"
                     }`}
                   >
                     <h3 className="text-lg font-medium leading-5 capitalize text-slate-600">
@@ -100,18 +102,22 @@ const Header = () => {
                     <p className="text-sm font-normal leading-4 pb-2 text-slate-400">
                       {session.user?.email}
                     </p>
-                    <div className="py-2 border-t border-slate-300 mb-2 cursor-pointer">
+                    <div className="py-4 border-t border-slate-300 mb-2 cursor-pointer">
                       <Link
-                        href={"/profile"}
-                        className="font-normal text-base "
+                        href="/profile"
+                        onClick={() => setIsActive(false)}
+                        className="font-normal text-base hover:bg-slate-200 px-2 py-1 rounded-lg"
                       >
                         👤 আমার প্রোফাইল
                       </Link>
                     </div>
                     <Link
-                      href={"/"}
-                      onClick={() => signOut()}
-                      className="text-base cursor-pointer font-normal leading-5 text-[#D03739] hover:text-main_color hover:bg-[#D03739] border border-red-500 rounded-lg px-3 py-1"
+                      href="/"
+                      onClick={() => {
+                        setIsActive(false);
+                        signOut();
+                      }}
+                      className="text-base cursor-pointer font-normal leading-5 text-[#D03739] hover:text-main_color hover:bg-[#D03739] border border-red-500 rounded-lg px-4 py-1 ml-2"
                     >
                       ↩︎ সাইন আউট
                     </Link>
