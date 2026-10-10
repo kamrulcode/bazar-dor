@@ -27,7 +27,7 @@ const HomePage = () => {
             </p>
             <Link
               href="#সব-পণ্য"
-              className="sm:self-start  py-px px-4 bg-accent_color/90 text-base text-main_color flex items-center rounded-lg font-medium leading-5 h-10 hover:bg-accent_color justify-center"
+              className="sm:self-start  py-px px-4 bg-accent_color text-base text-main_color flex items-center rounded-lg font-medium leading-5 h-10 hover:opacity-90 justify-center"
             >
               সব পণ্য দেখুন
             </Link>

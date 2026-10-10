@@ -42,7 +42,7 @@ const NavLinks = () => {
   if (loading) return <NavCategorySkeleton />;
 
   return (
-    <div className="sm:sticky top-17 z-10 bg-main_color ">
+    <div className="sm:sticky top-17 z-10 bg-main_color border-b border-[#E1E8E1]">
       <div className="flex flex-wrap  items-center main-container justify-center pt-1 pb-2 ">
         {data.map((nav) => (
           <Link

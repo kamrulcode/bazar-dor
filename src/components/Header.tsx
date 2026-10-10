@@ -42,7 +42,7 @@ const Header = () => {
 
   return (
     <>
-      <header className="sticky top-0 z-30 border-b border-[#E1E8E1] bg-main_color">
+      <header className="sticky top-0 z-30  bg-main_color">
         <div className="main-container">
           {/* Main header row */}
           <div className="flex min-h-16 items-center justify-between gap-3 py-2">

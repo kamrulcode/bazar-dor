@@ -1,5 +1,7 @@
 "use client";
 
+import NotFound from "@/app/not-found";
+import ProductGridSkeleton from "@/components/skeletons/ProductGridSkeleton";
 import type { ProductT, MarketT } from "@/type/type";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -131,6 +133,10 @@ export default function ProductDetails({
         ? "text-emerald-600"
         : "text-[#68746b]";
 
+  if (loading) return <ProductGridSkeleton />;
+
+  if (!loading && error && !product) return <NotFound />;
+
   return (
     <main className="min-h-screen bg-[#f0f5f0] px-3 py-4 text-[#27332b] sm:px-6 sm:py-6">
       <div className="mx-auto max-w-7xl">
@@ -232,18 +238,6 @@ export default function ProductDetails({
               <h2 className="mb-3 text-lg font-bold">
                 বাজারভিত্তিক আঞ্চলিক দাম
               </h2>
-
-              {loading && (
-                <div className="flex justify-center p-8">
-                  <span className="loading loading-spinner loading-md text-emerald-600" />
-                </div>
-              )}
-
-              {!loading && error && (
-                <div className="alert mb-3 border border-red-200 bg-red-50 text-sm text-red-700">
-                  <span>{error}</span>
-                </div>
-              )}
 
               {!loading && !error && markets.length === 0 && (
                 <div className="rounded-xl border border-[#e5ece6] p-5 text-center text-sm text-[#68746b]">

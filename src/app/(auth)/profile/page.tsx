@@ -52,7 +52,7 @@ export default function ProfilePage() {
           {/* Avatar */}
           <div className="flex flex-col items-center">
             <div className="avatar placeholder">
-              <div className="flex h-24 w-24 items-center justify-center overflow-hidden rounded-full border-4 border-white bg-[#e0eee3] text-[#07883e] shadow-sm">
+              <div className="flex h-24 w-24 items-center justify-center overflow-hidden rounded-full border-4 border-green-200 bg-[#e0eee3] text-[#07883e] shadow-sm">
                 {session?.user.image ? (
                   <Image
                     src={session?.user.image}

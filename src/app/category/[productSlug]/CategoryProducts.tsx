@@ -1,5 +1,6 @@
 "use client";
 
+import NotFound from "@/app/not-found";
 import ProductGrid from "@/components/ProductGrid";
 import { CategorySkeletons } from "@/components/skeletons/CategorySkeletons";
 import { toBanglaNumber } from "@/fn/function";
@@ -116,7 +117,7 @@ const CategoryProducts = ({
   }
 
   if (error) {
-    return <p className="py-6 text-red-600">{error}</p>;
+    return <NotFound />;
   }
 
   return (

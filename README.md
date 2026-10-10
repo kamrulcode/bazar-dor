@@ -32,7 +32,7 @@
   <img
     width="100%"
     alt="Bazar-Dor — bringing market prices closer to you"
-    src="https://placehold.co/1200x300/102D20/F4F8F2?text=BAZAR-DOR%20%7C%20Daily%20Market%20Prices&font=montserrat"
+    src="./public/readmebanner.png"
   />
 </div>
 
