@@ -44,7 +44,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   console.log(product[0]);
 
   return {
-    title: product ? `${product[0].nameBn}` : "পৃষ্ঠা পাওয়া যায়নি",
+    title: product[0] ? `${product[0].nameBn}` : "পৃষ্ঠা পাওয়া যায়নি",
   };
 }
 
@@ -54,7 +54,7 @@ const CategoryProduct = ({
   params: Promise<{ productSlug: string }>;
 }) => {
   return (
-    <div className="main-container flex-1 ">
+    <div className="main-container flex-1 flex flex-col justify-center ">
       <Suspense fallback={"লোড হচ্ছে"}>
         <DynamicMarker />
       </Suspense>
