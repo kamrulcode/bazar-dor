@@ -3,7 +3,7 @@ import { Hind_Siliguri } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import Marquee from "@/components/Marquee";
+import MarqueePage from "@/components/Marquee";
 import { Suspense } from "react";
 import { Toaster } from "react-hot-toast";
 import MarqueeSkeleton from "@/components/skeletons/MarqueeSkeleton";
@@ -24,7 +24,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body className="bg-back_color min-h-screen flex flex-col">
         <Header />
         <Suspense fallback={<MarqueeSkeleton />}>
-          <Marquee />
+          <MarqueePage />
         </Suspense>
         <main className="flex-1">{children}</main>
         <Footer />

@@ -29,9 +29,15 @@ function SummaryCard({
 }) {
   return (
     <div className="rounded-xl border border-[#e5ece6] bg-[#fafcf9] p-3">
-      <p className="text-xs text-base-content/60">{label}</p>
-      <p className={`mt-1 text-2xl font-bold ${color}`}>{value}</p>
-      <p className="mt-1 text-xs text-base-content/60">{note}</p>
+      <p className="sm:text-sm text-xs font-medium text-base-content/60">
+        {label}
+      </p>
+      <p className={`sm:mt-1 sm:text-2xl text-lg font-bold ${color}`}>
+        {value}
+      </p>
+      <p className="sm:mt-1 sm:text-xs text-[10px] text-base-content/60">
+        {note}
+      </p>
     </div>
   );
 }
@@ -157,14 +163,14 @@ export default function ProductDetails({
         </div>
 
         {/* Product Header */}
-        <section className="card mb-3 border border-[#e5ece6] bg-[#fbfdfb] shadow-none">
-          <div className="card-body sm:flex sm:flex-row items-center gap-3 p-3 sm:p-4">
-            <div className="flex shrink-0 items-center justify-center rounded-xl bg-gray-200 sm:text-5xl text-2xl sm:w-20 w-10 sm:h-20 h-10 ">
+        <section className=" card mb-3 border border-[#e5ece6] bg-[#fbfdfb] shadow-none ">
+          <div className="relative card-body sm:flex sm:flex-row items-center gap-3  p-3 sm:p-4">
+            <div className="sm:static absolute sm:right-0 right-5 flex shrink-0 items-center justify-center rounded-xl bg-gray-200 sm:text-5xl text-3xl sm:w-20 w-13 sm:h-20 h-13 ">
               {product?.image ?? product?.categoryIcon ?? "🥬"}
             </div>
 
-            <div className="min-w-0 flex-1">
-              <h1 className="text-base font-extrabold sm:text-4xl">
+            <div className="w-7/8 sm:w-auto sm:flex-1">
+              <h1 className="text-base font-extrabold sm:text-4xl sm:mb-0 mb-2">
                 {product?.nameBn ?? "বাজারদর"}
               </h1>
 
@@ -180,7 +186,7 @@ export default function ProductDetails({
               </p>
             </div>
 
-            <div className="min-w-19 rounded-xl bg-[#f0f5f0] px-3 py-2 text-center sm:block flex">
+            <div className="min-w-19 sm:w-auto w-7/8 rounded-xl bg-[#f0f5f0] sm:px-3 sm:py-2 text-center sm:block flex items-center">
               <p className="text-sm text-base-content/60">আজকের দাম</p>
 
               <p className="text-xl sm:text-4xl font-extrabold">
@@ -211,7 +217,7 @@ export default function ProductDetails({
           <div className="card-body gap-3 p-3 sm:p-4">
             <h2 className="text-lg font-bold">দামের সারসংক্ষেপ</h2>
 
-            <div className="grid grid-cols-1 gap-2 sm:grid-cols-3">
+            <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
               <SummaryCard
                 label="সর্বনিম্ন দাম"
                 value={formatPrice(minPrice)}

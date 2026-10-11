@@ -14,7 +14,7 @@ const HomePage = () => {
         <div className="sm:flex p-6 justify-between ">
           <div className="flex flex-col justify-center text-center sm:text-left">
             <Suspense fallback="loading..">
-              <span className="self-start bg-accent_color/10 py-1 px-3 text-sm rounded-2xl">
+              <span className="sm:self-start bg-accent_color/10 py-1 px-3 text-sm rounded-2xl">
                 <DatePage color="text-accent_color" />
               </span>
             </Suspense>
