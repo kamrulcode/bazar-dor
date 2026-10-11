@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
-import { signUp } from "@/lib/auth-client";
+import { signIn, signUp } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
 import { FaGithub, FaGoogle } from "react-icons/fa";
 import toast from "react-hot-toast";
@@ -236,8 +236,12 @@ export default function SignUP() {
           <div className="grid grid-cols-2 gap-2">
             <button
               type="button"
-              onClick={() => {
+              onClick={async () => {
                 // Connect Google OAuth here.
+                const data = await signIn.social({
+                  provider: "google",
+                });
+                console.log(data);
               }}
               className="btn h-10 min-h-10 gap-1.5 rounded-lg border border-[#dce5dd] bg-transparent px-2 text-xs font-semibold text-[#253029] shadow-none hover:bg-[#f0f5f0] sm:text-sm"
             >
@@ -249,8 +253,12 @@ export default function SignUP() {
 
             <button
               type="button"
-              onClick={() => {
+              onClick={async () => {
                 // Connect GitHub OAuth here.
+                const data = await signIn.social({
+                  provider: "github",
+                });
+                console.log(data);
               }}
               className="btn h-10 min-h-10 gap-1.5 rounded-lg border border-[#dce5dd] bg-transparent px-2 text-xs font-semibold text-[#253029] shadow-none hover:bg-[#f0f5f0] sm:text-sm"
             >

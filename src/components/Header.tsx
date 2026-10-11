@@ -118,6 +118,7 @@ const Header = () => {
         </div>
       </header>
       {/* Navigation links */}
+
       <Suspense fallback={""}>
         <NavLinks />
       </Suspense>

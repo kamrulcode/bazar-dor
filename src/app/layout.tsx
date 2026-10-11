@@ -14,10 +14,11 @@ const hindSiliguri = Hind_Siliguri({
 });
 
 export const metadata: Metadata = {
-  title: "বাজার দর",
-  description: "আজকের বাজারের দাম এক নজরে",
+  title: {
+    default: "বাজার দর",
+    template: "বাজার দর | %s",
+  },
 };
-
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en" data-theme="light" className={`${hindSiliguri.className}`}>
@@ -26,7 +27,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <Suspense fallback={<MarqueeSkeleton />}>
           <MarqueePage />
         </Suspense>
-        <main className="flex-1">{children}</main>
+        <main className="flex-1  flex flex-col justify-center">{children}</main>
         <Footer />
         <Toaster />
       </body>

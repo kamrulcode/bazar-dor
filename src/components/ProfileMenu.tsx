@@ -55,12 +55,12 @@ export default function ProfileMenu() {
         aria-expanded={isOpen}
         className="flex items-center gap-2 rounded-lg p-1.5 transition hover:bg-accent_color/10"
       >
-        <span className="flex  h-9 w-9 shrink-0 items-center justify-center overflow-hidden rounded-lg bg-green-100 ring-2 ring-green-300 p-1">
+        <span className="flex  h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-lg bg-green-100 ring-2 ring-green-300">
           {user.image ? (
             <Image
               src={user.image}
-              width={36}
-              height={36}
+              width={42}
+              height={42}
               alt="Profile picture"
               className="h-full w-full object-cover"
             />
